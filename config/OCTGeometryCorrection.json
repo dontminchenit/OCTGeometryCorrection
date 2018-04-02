@@ -1,0 +1,56 @@
+[
+	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "configuration/OCTGeometryCorrectionLocalHook",
+		"name": "OCTGeometryCorrection",
+		"pathPlacement": "append",
+		"subfolder": "code",
+		"toolboxRoot": "",
+		"type": "git",
+		"update": "",
+		"url": ""
+	},
+ 	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "",
+		"name": "OCTLayerSegmentation2.11",
+		"pathPlacement": "append",
+		"subfolder": "",
+		"toolboxRoot": "",
+		"type": "webget",
+		"update": "",
+		"url": "https:\/\/www.nitrc.org\/frs\/download.php\/7379\/OCTLayerSegmentation2.11.zip"
+	},
+ 	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "",
+		"name": "NIfTI_20140122",
+		"pathPlacement": "append",
+		"subfolder": "",
+		"toolboxRoot": "",
+		"type": "webget",
+		"update": "",
+		"url": "https:\/\/www.mathworks.com\/matlabcentral\/mlc-downloads\/downloads\/submissions\/8797\/versions\/28\/download\/zip"
+	},
+ 	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "",
+		"name": "AOAutomontaging",
+		"pathPlacement": "append",
+		"subfolder": "",
+		"toolboxRoot": "",
+		"type": "webget",
+		"update": "",
+		"url": "https:\/\/github.com\/BrainardLab\/AOAutomontaging.git"
+	}
+
+]
+
