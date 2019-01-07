@@ -33,12 +33,13 @@ function [fig,sloBars_v_reg,sloBars_h,mapSLO_v_interp_reg,mapSLO_h_interp,slo_v_
 
 [sloBars_h,  mapSLO_h] = OCTBarsOnSLO(slo_h,header_h,BScanHeader_h,BScans_h,map_h);
 mapSLO_h_interp = interpolateEnface(double(mapSLO_h));
-% figure(1)
-% subplot(1,2,1);
-% imagesc(sloBars_h);
-% subplot(1,2,2);
-% imagesc(mapSLO_h_interp);
-% colormap('gray')
+figure(1)
+subplot(1,2,1);
+imagesc(sloBars_h);
+subplot(1,2,2);
+imagesc(mapSLO_h_interp);
+colormap('gray')
+caxis([min(mapSLO_h_interp(:)) max(mapSLO_h_interp(:))]);
 
 
 
@@ -52,12 +53,12 @@ mapSLO_h_interp = interpolateEnface(double(mapSLO_h));
 
 [sloBars_v,  mapSLO_v] = OCTBarsOnSLO(slo_v,header_v,BScanHeader_v,BScans_v,map_v);
 mapSLO_v_interp = interpolateEnface(double(mapSLO_v));
-% figure(2)
-% subplot(1,2,1);
-% imagesc(sloBars_v);
-% subplot(1,2,2);
-% imagesc(mapSLO_v_interp);
-% colormap('gray')
+figure(2)
+subplot(1,2,1);
+imagesc(sloBars_v);
+subplot(1,2,2);
+imagesc(mapSLO_v_interp);
+colormap('gray')
 
 [optimizer, metric] = imregconfig('monomodal');
 [tform] =  imregtform(slo_v, slo_h, 'rigid', optimizer, metric);
@@ -67,12 +68,15 @@ sloBars_v_reg = imwarp(sloBars_v,tform,'OutputView',imref2d(size(slo_h)));
 slo_v_reg = imwarp(slo_v,tform,'OutputView',imref2d(size(slo_h)));
 
 
-% figure(3)
-% subplot(1,2,1);
-% imagesc(sloBars_v_reg);
-% subplot(1,2,2);
-% imagesc(mapSLO_v_interp_reg);
-% colormap('gray')
+figure(3)
+subplot(1,2,1);
+imagesc(sloBars_v_reg);
+subplot(1,2,2);
+imagesc(mapSLO_v_interp_reg);
+colormap('gray')
+caxis([min(mapSLO_v_interp_reg(:)) max(mapSLO_v_interp_reg(:))]);
+
+
 
 [sloBars_combined, ~] = OCTBarsOnSLO(sloBars_v_reg,header_h,BScanHeader_h,BScans_h,map_h);
 mapSLO_combined = (mapSLO_v_interp_reg + mapSLO_h_interp)/2;

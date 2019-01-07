@@ -1,0 +1,24 @@
+
+(r1_c1^2 - 2*cos(a2)*r1_c1*r2_c1 - r1_c2^2 + 2*cos(a2)*r1_c2*r2_c2 + r2_c1^2 - r2_c2^2)/(2*(cos(a2) - 1)*(r1_c1 - r1_c2 + r2_c1 - r2_c2))
+
+
+(r1_c1^2- r1_c2^2  + r2_c1^2 - r2_c2^2 + 2*cos(a2)*r1_c2*r2_c2 - 2*cos(a2)*r1_c1*r2_c1 )/(2*(cos(a2) - 1)*(r1_c1 - r1_c2 + r2_c1 - r2_c2))
+
+
+a=r1_c1^2- r1_c2^2  + r2_c1^2 - r2_c2^2
+b=2*(r1_c1 - r1_c2 + r2_c1 - r2_c2)
+c=2*r1_c2*r2_c2
+d=2*r1_c1*r2_c1
+R*(b*(cos(a2) - 1))=(a + c*cos(a2) - d*cos(a2))
+
+
+0=a + c*cos(a2) - d*cos(a2) - R*(b*(cos(a2) - 1)
+0=a + (c-d)*cos(a2) - b*R*(cos(a2) - 1)
+
+
+w=cos(a2)
+q=R*(cos(a2) - 1)
+0=a + (c-d)*w - b*q
+
+0=A*W
+

@@ -1,4 +1,4 @@
-%[fig,sloBars_v_reg,sloBars_h,mapSLO_v_interp_reg,mapSLO_h_interp,slo_v_reg,tform] = plotBndDiff(volFn_v, volFn_h, enface_v, enface_h');
+[fig,sloBars_v_reg,sloBars_h,mapSLO_v_interp_reg,mapSLO_h_interp,slo_v_reg,tform] = plotBndDiff(volFn_v, volFn_h, enface_v, enface_h');
 
 
 %[fig,sloBars_v_reg,sloBars_h,mapSLO_v_interp_reg,mapSLO_h_interp,tform] = plotBndDiff(volFn_v, volFn_h, totalThickness_v, totalThickness_h);
@@ -12,7 +12,15 @@ Imoving_slo = double(slo_v_reg).*mask;
 Istatic_slo = double(slov_h).*mask;
 
 
-[Ireg,Bx,By,Fx,Fy] = register_images(Imoving,Istatic,struct('Similarity','p'));
+% % Use mutual information
+%   Options.Similarity='mi';
+% % Set grid smoothness penalty
+%   Options.Penalty = 1e-3;
+
+[Ireg,Grid,Spacing,M,B,F] = image_registration(Imoving,Istatic);
+
+
+%[Ireg,Bx,By,Fx,Fy] = register_images(Imoving,Istatic,struct('Similarity','p'));
 
 
   % Show the registration result

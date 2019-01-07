@@ -1,6 +1,6 @@
 origDir = 'C:\Users\dontm\Dropbox (Aguirre-Brainard Lab)\AOSO_data\connectomeRetinaData\';
 outDir = 'C:\Users\dontm\Documents\ResearchResults\OCTGeometryCorrection\FeatureMatch_3_12_2018';
-inDir = 'C:\Users\dontm\Documents\ResearchResults\OCTGeometryCorrection\FullProcess';
+inDir = 'C:\Users\dontm\Dropbox (Aguirre-Brainard Lab)\AOSO_analysis\AURAToolsSegmentations_v2_11_Date_3_19_2018';
 ids = 11072;
 eyeSide = {'OD'};
 
@@ -17,14 +17,17 @@ id = num2str(11072);
                 if(~strcmp(scans_ii,'.') && ~strcmp(scans_ii,'..'))
                     subplot(1,length(scans)-2,counter);
                     matfile = load(fullfile(subInDir,scans_ii,[scans_ii '_result.mat']));
-                    
                     subOrigDir = fullfile(origDir,id,'HeidelbergSpectralisOCT',eyeSide{e});
                     fn = fullfile(subOrigDir,[scans_ii '.vol']);
                     [header, BScanHeader, slo, BScans] = openVolFast(fn);
                     
                     if(BScanHeader.StartX(1) == BScanHeader.EndX(1))
                         ilmBnd = matfile.bd_pts(:,:,1);
-                        enface_v=matfile.bd_pts(:,:,6)-matfile.bd_pts(:,:,5);
+                        enface_v=findenface(BScans,matfile.bd_pts(:,:,6),matfile.bd_pts(:,:,5));
+%                         figure(10)
+%                         imagesc(enface_v)
+%                         colormap('gray')
+%                         caxis([min(enface_v(:)) max(enface_v(:))]);
                         totalThickness_v=matfile.bd_pts(:,:,9)-matfile.bd_pts(:,:,1);
                         volFn_v = fn; 
                         map_v = ilmBnd;
@@ -32,7 +35,9 @@ id = num2str(11072);
                         BScans_v = BScans;
                     else
                         ilmBnd = matfile.bd_pts(:,:,1)';
-                        enface_h=matfile.bd_pts(:,:,6)-matfile.bd_pts(:,:,5);
+                        %enface_h=matfile.bd_pts(:,:,6)-matfile.bd_pts(:,:,5);
+                        %enface_h=max(BScans(matfile.bd_pts(:,:,6):matfile.bd_pts(:,:,5)));
+                        enface_h=findenface(BScans,matfile.bd_pts(:,:,6),matfile.bd_pts(:,:,5));
                         totalThickness_h=matfile.bd_pts(:,:,9)-matfile.bd_pts(:,:,1);
                         enface_h = enface_h';
                         volFn_h = fn;
