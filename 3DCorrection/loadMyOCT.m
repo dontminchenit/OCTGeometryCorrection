@@ -16,8 +16,13 @@ BScans= BScans.^.25;
 counter = counter+1;
 [retinaMask, shifts, boundaries, nbpt] = retinaDetector2_scale(BScans,header);
 myBoundaries{counter} = boundaries;
+
+enface =findenface(BScans,boundaries(:,:,1),boundaries(:,:,end));
+
 subplot(3,4,n)
-imagesc(BScans(:,:,49));
+%imagesc(BScans(:,:,49));
+imagesc(enface)
+
 end
 
 
@@ -39,8 +44,13 @@ counter = counter+1;
 [retinaMask, shifts, boundaries, nbpt] = retinaDetector2_scale(BScans,header);
 myBoundaries{counter} = boundaries;
 
+
+enface =findenface(BScans,boundaries(:,:,1),boundaries(:,:,end));
+
 subplot(3,4,n+4)
-imagesc(BScans(:,:,49));
+%imagesc(BScans(:,:,49));
+imagesc(enface)
+
 end
 
 
@@ -61,8 +71,11 @@ counter = counter+1;
 [retinaMask, shifts, boundaries, nbpt] = retinaDetector2_scale(BScans,header);
 myBoundaries{counter} = boundaries;
 
+enface =findenface(BScans,boundaries(:,:,1),boundaries(:,:,end));
+
 subplot(3,4,n+8)
-imagesc(BScans(:,:,49));
+%imagesc(BScans(:,:,49));
+imagesc(enface)
 end
 
 % 

@@ -1,4 +1,4 @@
-function [correctedLoc_X, correctedLoc_Y, correctedLoc_Z] = fixOCTGeometry(OCTin,Angles,Center,R,coordmode)
+function [correctedLoc_X, correctedLoc_Y, correctedLoc_Z] = fixOCTGeometry(OCTin,Angles,Center,R,Res,coordmode)
 
 XN = size(OCTin,2);
 YN = size(OCTin,1);
@@ -20,10 +20,10 @@ rotationX = [1 0 0; 0 cos(alpha_x) -sin(alpha_x);0 sin(alpha_x) cos(alpha_x)];
 rotationY = [cos(alpha_y) 0 sin(alpha_y); 0 1 0; -sin(alpha_y) 0 cos(alpha_y)];
 
 Camera_Rot = rotationX*rotationY;
-res = [0.00387 0.01281 0.06834];
+%res = [0.00387 0.01281 0.06834];
 
-AscanPoints = R:(YN*res(1))/(YN-1):(R+YN*res(1));
-zFov = ZN*res(3);
+AscanPoints = R:(YN*Res(1))/(YN-1):(R+YN*Res(1));
+zFov = ZN*Res(3);
 zN = -zFov/2:(((zFov)/(ZN-1))):zFov/2;
 
 correctedLoc_X = zeros(YN,XN,ZN);
@@ -43,14 +43,14 @@ for b = 1:ZN
         Zq = (AscanPoints)'*cos(theta)*ones(1,length(phi));
         
     else
-    z = zN(b);
-    Xq = (AscanPoints)'*cos(phi);
-    Yq = (AscanPoints)'*sin(phi);
-    Zq = z*ones(length(AscanPoints),length(phi));
+        z = zN(b);
+        Xq = (AscanPoints)'*cos(phi);
+        Yq = (AscanPoints)'*sin(phi);
+        Zq = z*ones(length(AscanPoints),length(phi));
     end
     
     coor_q_rot = Camera_Rot*[Xq(:)'; Yq(:)'; Zq(:)'];
-
+    
     Xq = reshape(coor_q_rot(1,:),[length(AscanPoints) length(phi)]) + x_C;
     Yq = reshape(coor_q_rot(2,:),[length(AscanPoints) length(phi)]) + y_C;%Center(2)*ones(length(AscanPoints),length(phi));
     Zq = reshape(coor_q_rot(3,:),[length(AscanPoints) length(phi)]) + z_C;%Center(3)*ones(length(AscanPoints),length(phi));
@@ -58,5 +58,5 @@ for b = 1:ZN
     correctedLoc_X(:,:,b) = Xq;
     correctedLoc_Y(:,:,b) = Yq;
     correctedLoc_Z(:,:,b) = Zq;
-        
+    
 end
